@@ -7,7 +7,7 @@
 // Scripts
 // 
 
-window.addEventListener('DOMContentLoaded', event => {
+/* window.addEventListener('DOMContentLoaded', event => {
 
     // Activate Bootstrap scrollspy on the main nav element
     const mainNav = document.body.querySelector('#mainNav');
@@ -32,3 +32,9 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+ */
+
+
+const stationsData = fetch("http://localhost:5000/api/getStations")  .then((response) => response.json())
+.then((data) => stations = data);
+
