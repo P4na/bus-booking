@@ -1,9 +1,13 @@
-var express = require("express");
+const express = require("express");
 
-var app = express();
+const app = express();
 
-var controllerRouter = require("./controller/controller");
+const cors = require('cors')
+app.use(cors({
+    origin:"http://localhost:3000"
+}))
 
+const controllerRouter = require("./controller/controller");
 app.use('/api', controllerRouter)
 
 app.use(express.json());
