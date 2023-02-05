@@ -5,7 +5,6 @@ import { NavbarComp } from "../components/NavbarComp"
 export const Dashboard = () => {
     return (
     <>
-        <NavbarComp/>
         <FormSelectMine/>
     </>
     )

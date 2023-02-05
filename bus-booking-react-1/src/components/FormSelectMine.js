@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import pgAxios from "../api/pgAxios";
+import {arrayMoveImmutable} from 'array-move';
+import { useNavigate } from "react-router-dom";
 
 export const FormSelectMine = () => {
   const [stations, setStations] = useState([]);
@@ -11,6 +13,7 @@ export const FormSelectMine = () => {
 
   const ALL_STATIONS_API = "/api/all-stations";
   const FIND_API = "/api/find/";
+  const navigate = useNavigate()
 
   const getAllStations = async () => {
     try {
@@ -34,25 +37,24 @@ export const FormSelectMine = () => {
   };
 
   const handleChangeDate = (e) => {
-    let dateToChange = e.target.value
-    let splittedData = dateToChange.split('-')
-    let newDate = ""
-    let monthEl = splittedData[1]
-    splittedData.remove(monthEl)
-
-    for(let i = 0; i < splittedData.length; i++){
-      newDate += splittedData[i] + "-"
+    let dateToChange = e.target.value.split("-")
+    const array1 = arrayMoveImmutable(dateToChange, 2, 1)
+    let dateFor = ""
+    for(let i = 0; i<array1.length; i++){
+      dateFor+=array1[i]
+      if(i <= 1 ) { dateFor += "-" }
     }
+    setDate(dateFor)
     
-    console.log(newDate)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await pgAxios
-        .get(FIND_API + `${stOne}/${stTwo}`)
+        .get(FIND_API + `${stOne}/${stTwo}/${date}`)
         .then((res) => console.log(res.data));
+        navigate(`/search/${stOne}/${stTwo}/${date}`)
     } catch (error) {
       console.log(error);
     }
@@ -82,6 +84,7 @@ export const FormSelectMine = () => {
         <Form.Label>Partenza</Form.Label>
         <Form.Control type="date" onChange={handleChangeDate}></Form.Control>
       </Form.Group>
+
       <Button variant="primary" type="submit">
         Submit
       </Button>
