@@ -14,12 +14,12 @@ const getSingleStations = (elId) => {
 };
 
 const getSingleBus = (elId) => {
-  return `SELECT * FROM "bookingBus".bus WHERE id = ${elId}`
-}
+  return `SELECT * FROM "bookingBus".bus WHERE id = ${elId}`;
+};
 
-const getSeatsBySeats = (elId) => {
-  return `SELECT * FROM "bookingBus".seat `
-}
+const getSeatsByBus = (elId) => {
+  return `SELECT * FROM "bookingBus".seat `;
+};
 
 module.exports = {
   getStations,
@@ -27,5 +27,5 @@ module.exports = {
   getSingleStations,
   findRoute,
   getSingleBus,
-  getSeatsBySeats
+  getSeatsByBus,
 };

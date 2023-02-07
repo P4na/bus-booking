@@ -9,7 +9,5 @@ const pool = new Pool({
   password: process.env.PASSWORD,
   port: process.env.PORT,
 });
- 
-
 
 module.exports = pool;
