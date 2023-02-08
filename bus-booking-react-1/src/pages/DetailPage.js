@@ -7,12 +7,12 @@ export const DetailPage = () => {
     
             <Container>
                 <Row>
-                <Col>
-                    <BusMatrix/>
-                </Col>
-                <Col>
-                    <FormContact/>
-                </Col>
+                    <Col>
+                        <BusMatrix/>
+                    </Col>
+                    <Col>
+                        <FormContact/>
+                    </Col>
                 </Row>
             </Container>
 

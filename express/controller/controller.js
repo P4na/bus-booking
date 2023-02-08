@@ -18,10 +18,10 @@ router.get("/all-stations", (req, res, next) => {
     if (error) throw error;
     res.send(response.rows);
   });
-});
+}); 
 
 router.get(`/find-route/:el1/:el2/:eltime`, (req, res, next) => {
-  pool.query(
+  pool.query( 
     findStations(req.params.el1, req.params.el2, req.params.eltime),
     (error, response) => {
       if (error) throw error;

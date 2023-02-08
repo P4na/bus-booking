@@ -2,16 +2,14 @@ import { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import pgAxios from "../api/pgAxios";
 import Button from 'react-bootstrap/Button';
-import { useNavigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 export default function StationCard(props) {
   const [stationStart, setStationStart] = useState({})
   const [stationEnd, setStationEnd] = useState({})
 
-  const navigate = useNavigate()
-
-  const FIND_STATION_API = `/api/find/`
+  const FIND_STATION_API = `/api/find-station/`
 
   const searchRoute = async () => {
     try {

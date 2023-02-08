@@ -12,7 +12,7 @@ export const FormSelectMine = () => {
   const [date, setDate] = useState("");
 
   const ALL_STATIONS_API = "/api/all-stations";
-  const FIND_API = "/api/find/";
+  const FIND_API = "/api/find-route/";
   const navigate = useNavigate()
 
   const getAllStations = async () => {

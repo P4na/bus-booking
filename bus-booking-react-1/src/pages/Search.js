@@ -7,7 +7,7 @@ import StationCard from "../components/StationCard"
 export const Search = () => {
     const [routes, setRoutes] = useState([])
     const {el1, el2, eldate} = useParams()
-    const FIND_API = "/api/find/";
+    const FIND_API = "/api/find-route/";
 
     const searchStation = async () => {
         try {

@@ -8,3 +8,9 @@ La nuova page mostra tutti i possibili viaggi, poi la si clicca e si cambia pagi
 Devo fare la matrice dei posti, 
 innanzitutto devo suddividere la matrice per posti per fila.
 stampare la matrice a seconda dei posti dell'autobus, selezione come fossero checkbox
+
+
+
+////////////////////////////////
+DEVO SOLO SISTEMARE LA POST DEL FORM PER SALVARE
+E POI DISABILITARE I POSTI SALVATI
