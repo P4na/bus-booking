@@ -58,4 +58,13 @@ router.get(`/find-station/:id`, (req, res, next) => {
   });
 });
 
+router.post('/add-ticket/', (req, res)=>{
+  const {name, surname, email, bookedSeats} = req.body
+  if(bookedSeats.length > 1){
+    console.log("siamo tanti")
+  } else {
+    res.send(req.body)
+  }
+})
+
 module.exports = router;

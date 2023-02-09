@@ -21,6 +21,10 @@ const getSeatsByBus = (elId) => {
   return `SELECT * FROM "bookingBus".seat `;
 };
 
+const addTicket = (name, surname, email, seat) => {
+  return ``
+}
+
 module.exports = {
   getStations,
   findStations,

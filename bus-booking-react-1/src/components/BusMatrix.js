@@ -19,7 +19,7 @@ export const BusMatrix = () => {
                 k = 0
             }
             k++
-            lista.push(<input id={`${seats[i].id}`} type={"checkbox"} onClick={saveSeat}/>)
+            lista.push(<><input id={`${seats[i].id}`} type={"checkbox"} onClick={saveSeat} style={{width:"2.5rem", height:"4rem"}}/></>)
         }
         return lista
     }
@@ -59,7 +59,11 @@ export const BusMatrix = () => {
         <>
             <h1>Matrix</h1>
             <h3>Select a seat</h3>
-            <GenerateMatrix />
+            <div style={{border:"", }}>
+                <center>
+                    <GenerateMatrix />
+                </center>
+            </div>
         </>
     )
 
