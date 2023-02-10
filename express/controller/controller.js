@@ -9,6 +9,9 @@ const {
   findRoute,
   getSingleBus,
   getSeatsByBus,
+  addTicket,
+  findTicketsEmailRoute,
+  findSeatsOccupiedRoute,
 } = require("./query");
 
 var router = express.Router();
@@ -59,12 +62,34 @@ router.get(`/find-station/:id`, (req, res, next) => {
 });
 
 router.post('/add-ticket/', (req, res)=>{
-  const {name, surname, email, bookedSeats} = req.body
-  if(bookedSeats.length > 1){
-    console.log("siamo tanti")
-  } else {
-    res.send(req.body)
-  }
+  const {name, surname, email, bookedSeats, route} = req.body 
+
+  for (let i = 0; i < bookedSeats.length; i++) {
+    pool.query(
+      addTicket(name,surname,email, bookedSeats[i], route), (error, response)=> {
+      if (error) {throw error}; 
+      console.log(`seat ${bookedSeats[i]} prenotato`)
+        } 
+      )
+    }
+  res.status(201).send("prenotato tutto")
+})
+  
+router.get('/find-ticket-by-route-email/:email/:route',(req,res)=>{
+  pool.query(
+    findTicketsEmailRoute(req.params.email, req.params.route),(error, response)=> {
+      if (error) {throw error};
+      res.send(response.rows)
+    }
+  )
+})
+
+router.get('/find-seats-occupied/:route', (req, res)=>{
+  pool.query(findSeatsOccupiedRoute(req.params.route), (error, response)=>{
+    if (error) {throw error};
+      res.send(response.rows)
+  })
 })
 
 module.exports = router;
+ 

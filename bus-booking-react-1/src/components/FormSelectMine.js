@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import pgAxios from "../api/pgAxios";
-import {arrayMoveImmutable} from 'array-move';
+import { arrayMoveImmutable } from "array-move";
 import { useNavigate } from "react-router-dom";
 
 export const FormSelectMine = () => {
@@ -12,8 +12,8 @@ export const FormSelectMine = () => {
   const [date, setDate] = useState("");
 
   const ALL_STATIONS_API = "/api/all-stations";
-  const FIND_API = "/api/find-route/";
-  const navigate = useNavigate()
+  const FIND_ROUTE_API = "/api/find-route/";
+  const navigate = useNavigate();
 
   const getAllStations = async () => {
     try {
@@ -21,42 +21,35 @@ export const FormSelectMine = () => {
         setStations(res.data);
       });
     } catch (error) {
-      console.log(error);
+      throw(error);
     }
   };
+
   useEffect(() => {
     getAllStations();
   }, []);
 
-  const handleChangestOne = (e) => {
-    setStOne(e.target.options.selectedIndex);
-  };
-
-  const handleChangestTwo = (e) => {
-    setStTwo(e.target.options.selectedIndex);
-  };
-
   const handleChangeDate = (e) => {
-    let dateToChange = e.target.value.split("-")
-    const array1 = arrayMoveImmutable(dateToChange, 2, 1)
-    let dateFor = ""
-    for(let i = 0; i<array1.length; i++){
-      dateFor+=array1[i]
-      if(i <= 1 ) { dateFor += "-" }
+    let dateToChange = e.target.value.split("-");
+    const array1 = arrayMoveImmutable(dateToChange, 2, 1);
+    let dateFor = "";
+    for (let i = 0; i < array1.length; i++) {
+      dateFor += array1[i];
+      if (i <= 1) {
+        dateFor += "-";
+      }
     }
-    setDate(dateFor)
-    
-  }
+    setDate(dateFor);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await pgAxios
-        .get(FIND_API + `${stOne}/${stTwo}/${date}`)
-        .then((res) => console.log(res.data));
-        navigate(`/search/${stOne}/${stTwo}/${date}`)
+        .get(FIND_ROUTE_API + `${stOne}/${stTwo}/${date}`)
+        .then(navigate(`/search/${stOne}/${stTwo}/${date}`))
     } catch (error) {
-      console.log(error);
+      throw(error);
     }
   };
 
@@ -64,7 +57,7 @@ export const FormSelectMine = () => {
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3">
         <Form.Label>Partenza</Form.Label>
-        <Form.Select onChange={handleChangestOne}>
+        <Form.Select onChange={(e) => {setStOne(e.target.options.selectedIndex)}}>
           <option key="-1">----</option>
           {stations.map((el) => (
             <option key={el.id}>{el.name}</option>
@@ -73,7 +66,7 @@ export const FormSelectMine = () => {
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Arrivo</Form.Label>
-        <Form.Select onChange={handleChangestTwo}>
+        <Form.Select onChange={(e)=>{setStTwo(e.target.options.selectedIndex)}}>
           <option key="-1">----</option>
           {stations.map((el) => (
             <option key={el.id}>{el.name}</option>
@@ -84,7 +77,6 @@ export const FormSelectMine = () => {
         <Form.Label>Partenza</Form.Label>
         <Form.Control type="date" onChange={handleChangeDate}></Form.Control>
       </Form.Group>
-
       <Button variant="primary" type="submit">
         Submit
       </Button>

@@ -4,8 +4,7 @@ import { FormContact } from "../components/FormContact";
 
 export const DetailPage = () => {
     return (
-    
-            <Container>
+            <Container className="mt-5">
                 <Row>
                     <Col>
                         <BusMatrix/>
@@ -15,6 +14,5 @@ export const DetailPage = () => {
                     </Col>
                 </Row>
             </Container>
-
     );
   }

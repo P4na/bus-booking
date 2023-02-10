@@ -21,8 +21,17 @@ const getSeatsByBus = (elId) => {
   return `SELECT * FROM "bookingBus".seat `;
 };
 
-const addTicket = (name, surname, email, seat) => {
-  return ``
+const addTicket = (name,surname,email, seat, route) => {
+  return `INSERT INTO "bookingBus".ticket(user_name, user_surname, email, seat, route)
+    VALUES ('${name}', '${surname}', '${email}', '${seat}', ${route})`
+}
+
+const findTicketsEmailRoute = (email, route) => {
+  return `SELECT * FROM "bookingBus".ticket WHERE email='${email}' AND route=${route}`
+}
+
+const findSeatsOccupiedRoute = (route) => {
+  return `SELECT seat FROM "bookingBus".ticket WHERE route=${route} `
 }
 
 module.exports = {
@@ -32,4 +41,7 @@ module.exports = {
   findRoute,
   getSingleBus,
   getSeatsByBus,
+  addTicket,
+  findTicketsEmailRoute,
+  findSeatsOccupiedRoute
 };
