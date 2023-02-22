@@ -66,18 +66,18 @@ export const FormSelectMine = () => {
       </Form.Group>
       <Form.Group className="mb-3">
         <Form.Label>Arrivo</Form.Label>
-        <Form.Select onChange={(e)=>{setStTwo(e.target.options.selectedIndex)}}>
+        <Form.Select onChange={(e)=>{setStTwo(e.target.options.selectedIndex)}} >
           <option key="-1">----</option>
           {stations.map((el) => (
             <option key={el.id}>{el.name}</option>
-          ))}
+          ))} 
         </Form.Select>
       </Form.Group>
       <Form.Group>
         <Form.Label>Partenza</Form.Label>
-        <Form.Control type="date" onChange={handleChangeDate}></Form.Control>
+        <Form.Control type="date" onChange={handleChangeDate}/>
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="warning" type="submit" className="mt-3">
         Submit
       </Button>
     </Form>

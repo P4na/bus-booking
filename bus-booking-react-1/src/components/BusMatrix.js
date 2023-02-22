@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import BeatLoader from "react-spinners/BeatLoader";
+import MoonLoader from "react-spinners/MoonLoader";
 import pgAxios from "../api/pgAxios";
 
 export const BusMatrix = () => {
@@ -10,24 +12,32 @@ export const BusMatrix = () => {
 
   const [seats, setSeats] = useState([]);
   const [occupied, setOccupied] = useState([]);
-  const [bookedSeats, setBookedSeats] = useState([]);
+  const [bookedSeats] = useState([]);
 
   const GenerateMatrix = () => {
     const columns = 4;
     let k = 0;
     let lista = [];
     for (let i = 0; i < seats.length; i++) {
+      let choose = false
       if (k === columns) {
         lista.push(<br />);
         k = 0;
-      }
+      } 
       k++;
+      for (let a = 0; a < occupied.length; a++) {
+        if(seats[i].id === occupied[a].seat) {
+          choose = true;
+        }
+        
+      }
       lista.push(
         <input
           id={`${seats[i].id}`}
           type={"checkbox"}
           onClick={saveSeat}
           style={{ width: "2.5rem", height: "4rem" }}
+          disabled={choose}
         />
       );
     }
@@ -36,11 +46,11 @@ export const BusMatrix = () => {
 
   const getSeatsAPI = async () => {
     try {
-      await pgAxios.get(FIND_SEATS_BY_BUS_API + `${id}`).then((res) => {
-        setSeats(res.data);
-      });
       await pgAxios.get(FIND_SEATS_OCCUPIED + id).then((res) => {
         setOccupied(res.data);
+      });
+      await pgAxios.get(FIND_SEATS_BY_BUS_API + `${id}`).then((res) => {
+        setSeats(res.data);
       });
     } catch (error) {
       throw error;
@@ -73,7 +83,18 @@ export const BusMatrix = () => {
     <>
       <h1>Matrix</h1>
       <h3>Select a seat</h3>
-      <GenerateMatrix />
+      
+      {
+      seats.length<1 ?
+      <MoonLoader
+      color={'#3a3a47'}
+      loading={true}
+      size={100}
+      
+      />:
+        <GenerateMatrix />
+      }
+      
     </>
   );
 };

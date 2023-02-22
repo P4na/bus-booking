@@ -11,8 +11,9 @@ app.use(cors({origin: "http://localhost:3000"}));
 const controllerRouter = require("./controller/controller");
 app.use("/api", controllerRouter);
 
-
+ 
 
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`server connected at ${PORT}`));
+  
